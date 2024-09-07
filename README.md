@@ -284,6 +284,17 @@ service cloud.firestore {
 Bu kural, yalnızca oturum açmış kullanıcıların verilere erişmesine izin verir. Üretim ortamında daha güvenli bir yapı sağlar.
 
 
+## Screenshotlar
+
+Proje ile ilgili ekran görüntüleri veya şemalar için aşağıdaki dosyaları kullanabilirsiniz. Bu görseller, projenin işlevselliğini ve kullanıcı arayüzünü daha iyi anlamanızı sağlayacaktır.
+
+**Görsel Dosya Yolları:**
+
+1. ![Yönetim Paneli Genel Görünümü](docs/screenshots/dashboard-overview.png) ![Giriş Sayfası](docs/screenshots/login-page.png) - Yönetim paneli genel görünümü ve giriş sayfası
+
+Bu görseller, projenin çeşitli bölümlerini ve kullanıcı arayüzü öğelerini göstermek için hazırlanmıştır.
+
+
 ---
 
 Not
