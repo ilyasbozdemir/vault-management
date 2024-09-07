@@ -1,0 +1,83 @@
+{
+  "name": "@ilyasbozdemir/vault-management",
+  "version": "1.0.0-beta.20240907165532",
+  "private": false,
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "",
+    "logoUrl": "/img/favicon.svg"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "licenseInfo": {
+    "licenseKey": "",
+    "licenseDataUrl": "",
+    "licenseCheckUrl": ""
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "publish:npm": "npm publish --registry=https://registry.npmjs.org/",
+    "publish:gh": "npm publish --registry=https://npm.pkg.github.com/"
+  },
+  "keywords": ["vault", "management", "sdk"],
+  "author": "ilyasbozdemir",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@chakra-ui/icons": "^2.1.1",
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.10.5",
+    "@emotion/server": "^11.10.0",
+    "@emotion/styled": "^11.10.5",
+    "@next/bundle-analyzer": "^13.2.1",
+    "@sparticuz/chromium": "^126.0.0",
+    "autoprefixer": "^10.4.19",
+    "axios": "^1.7.2",
+    "bcrypt": "^5.1.1",
+    "cookie": "^0.6.0",
+    "cron-parser": "^4.9.0",
+    "date-fns": "^3.6.0",
+    "firebase": "^10.12.4",
+    "firebase-admin": "^12.3.0",
+    "formik": "^2.4.6",
+    "framer-motion": "^6.5.1",
+    "fs": "^0.0.1-security",
+    "fs-extra": "^11.2.0",
+    "js-cookie": "^3.0.5",
+    "mssql": "^11.0.1",
+    "net": "^1.0.2",
+    "next": "13.5.6",
+    "nodemailer": "^6.9.14",
+    "path": "^0.12.7",
+    "path-browserify": "^1.0.1",
+    "postcss": "^8.4.38",
+    "process": "^0.11.10",
+    "prop-types": "^15.8.1",
+    "pubsub-js": "^1.9.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-icons": "^5.2.1",
+    "react-input-mask": "^2.0.4",
+    "tailwindcss": "^3.4.3",
+    "xlsx": "^0.18.5",
+    "xml2js": "^0.6.2",
+    "yup": "^1.4.0",
+    "zustand": "^4.4.7"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.17",
+    "@babel/eslint-parser": "^7.22.15",
+    "@next/eslint-plugin-next": "^13.4.19",
+    "@types/node": "^22.5.4",
+    "@types/react": "^18.3.5",
+    "file-loader": "^6.2.0",
+    "i18nexus-cli": "^3.4.0",
+    "typescript": "^5.5.4",
+    "url-loader": "^4.1.1",
+    "webpack-bundle-analyzer": "^4.8.0"
+  }
+}

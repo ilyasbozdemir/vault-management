@@ -1,0 +1,47 @@
+# Node.js bağımlılıkları (eğer bunları image içinde yeniden yükleyecekseniz)
+node_modules
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Local development environment files
+.env
+.env.*
+
+# docs
+
+docs/
+
+# Logs
+logs
+*.log
+
+# Test ve coverage dosyaları
+coverage
+*.lcov
+
+# Dockerfile ve Docker-compose dosyaları hariç tüm gizli dosyalar
+.*
+!.dockerignore
+!Dockerfile
+!docker-compose*.yml
+
+# Git metadata (repository'ye özel)
+.git
+.gitignore
+
+# IDE ve editör klasörleri
+.vscode
+.idea
+
+# Temp dosyaları
+tmp
+*.tmp
+
+# Build klasörleri
+build
+dist
+
+# Cache dosyaları
+.cache
+.parcel-cache
