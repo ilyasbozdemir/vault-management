@@ -2,7 +2,7 @@
   "name": "@ilyasbozdemir/vault-management",
   "version": "1.0.0-beta.20240907165532",
   "private": false,
-  "description": "",
+  "description": "Bu proje, kapsamlı bir gizlilik ve erişim yönetim çözümü sunar. Firebase ile entegrasyon sağlayarak, güvenli veri yönetimi ve dinamik konfigürasyon sunar. Proje, Next.js frontend, modül dışa aktarma sistemi ve JavaScript/TypeScript destekli bir backend içerir. Docker, Nginx ve Docker Compose kullanarak geliştirme sürecinizi optimize edin.",
   "repository": {
     "type": "git",
     "url": "",
