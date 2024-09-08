@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import {
   Box,
@@ -18,6 +18,7 @@ import Logo from "../src/components/Logo";
 import Head from "next/head";
 import { auth } from "../firebase";
 import { getUserByEmail } from "../src/services/firebase/userService";
+import { getAppSettings } from "../src/services/firebase/settingsService";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -29,7 +30,11 @@ const LoginPage = () => {
   const handleEmailLogin = async (e) => {
     e.preventDefault();
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       const user = userCredential.user;
 
       const userData = await getUserByEmail(email);
@@ -64,10 +69,28 @@ const LoginPage = () => {
   const boxBg = useColorModeValue("white", "gray.800");
   const headingColor = useColorModeValue("purple.500", "purple.300");
 
+  const [appSettings, setAppSettings] = useState(null);
+
+  // App Settings (Başlık için)
+  const fetchAppSettings = async () => {
+    try {
+      const settings = await getAppSettings();
+      setAppSettings(settings);
+    } catch (error) {
+      console.error("Uygulama ayarları alınırken hata oluştu:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAppSettings();
+  }, []);
+
   return (
     <>
       <Head>
-        <title>Giriş Yap • rsrichsoul</title>
+        <title>
+          {appSettings ? `${appSettings.appName} • Giriş Yap` : "Giriş Yap"}
+        </title>
       </Head>
       <Center h="100vh">
         <Box
@@ -79,9 +102,15 @@ const LoginPage = () => {
           w={{ base: "full", sm: "300px", md: "500px" }}
         >
           <Center mb={6}>
-            <Logo isLink={false} />
+            <Logo isLink={false} platform='login' />
           </Center>
-          <Heading as="h1" size="lg" textAlign="center" color={headingColor} mb={6}>
+          <Heading
+            as="h1"
+            size="lg"
+            textAlign="center"
+            color={headingColor}
+            mb={6}
+          >
             Giriş Yap
           </Heading>
           <form onSubmit={handleEmailLogin}>

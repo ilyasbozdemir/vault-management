@@ -20,6 +20,7 @@ import { db } from "../firebase";
 import { updateUserProfile } from "../src/services/firebase/userService";
 import Head from "next/head";
 import RequireAuth from "../src/components/RequireAuth";
+import { getAppSettings } from "../src/services/firebase/settingsService";
 
 const Profile = () => {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -158,10 +159,29 @@ const Profile = () => {
     );
   }
 
+  const [appSettings, setAppSettings] = useState(null);
+
+  // App Settings (Başlık için)
+  const fetchAppSettings = async () => {
+    try {
+      const settings = await getAppSettings();
+      setAppSettings(settings);
+    } catch (error) {
+      console.error("Uygulama ayarları alınırken hata oluştu:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAppSettings();
+  }, []);
+
   return (
     <RequireAuth>
       <Head>
-        <title>Profil • rsrichsoul</title>
+<title>
+{appSettings ? `${appSettings.appName} • Profil` : "Profil"}
+</title>
+
       </Head>
       <Box
         p={8}

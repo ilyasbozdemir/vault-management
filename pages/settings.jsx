@@ -65,10 +65,28 @@ const Settings = () => {
     }
   };
 
+  const [appSettings, setAppSettings] = useState(null);
+
+  // App Settings (Başlık için)
+  const fetchAppSettings = async () => {
+    try {
+      const settings = await getAppSettings();
+      setAppSettings(settings);
+    } catch (error) {
+      console.error("Uygulama ayarları alınırken hata oluştu:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAppSettings();
+  }, []);
+
   return (
     <RequireAuth>
       <Head>
-        <title>Ayarlar • rsrichsoul</title>
+        <title>
+        {appSettings ? `${appSettings.appName} • Ayarlar` : "Ayarlar"}
+        </title>
       </Head>
 
       <Box p={4}>
@@ -112,7 +130,8 @@ const Settings = () => {
                   onChange={handleChange}
                 />
                 <FormHelperText>
-                  Logo olarak kullanılacak URL. Örn: https://example.com/logo.png
+                  Logo olarak kullanılacak URL. Örn:
+                  https://example.com/logo.png
                 </FormHelperText>
               </FormControl>
             </GridItem>

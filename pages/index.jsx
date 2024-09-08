@@ -34,11 +34,29 @@ function DashboardPage() {
     fetchServerStatus();
   }, []);
 
+  const [appSettings, setAppSettings] = useState(null);
+
+  // App Settings (Başlık için)
+  const fetchAppSettings = async () => {
+    try {
+      const settings = await getAppSettings();
+      setAppSettings(settings);
+    } catch (error) {
+      console.error("Uygulama ayarları alınırken hata oluştu:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAppSettings();
+  }, []);
+
   return (
     <RequireAuth>
       <Box p={4}>
         <Head>
-          <title>Ana Sayfa • rsrichsoul</title>
+          <title>
+            {appSettings ? `${appSettings.appName} • Ana Sayfa` : "Ana Sayfa"}
+          </title>
         </Head>
         <Heading mb={6}>Veritabanı Yönetim Paneli</Heading>
 

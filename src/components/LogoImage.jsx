@@ -3,7 +3,7 @@ import React from 'react'
 
 function LogoImage({ size, cursor, color }) {
   const src =
-  color === "black"
+  color === "white"
     ? "/img/logo-dark.svg"
     : "/img/logo-light.svg";
 
@@ -14,6 +14,7 @@ return (
       width={size.w}
       height={size.h}
       alt="logo"
+      layout="intrinsic" 
     />
   </>
 );

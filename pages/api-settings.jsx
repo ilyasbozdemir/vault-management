@@ -30,6 +30,7 @@ import {
 import AlertComponent from "../src/components/AlertComponent";
 import Head from "next/head";
 import RequireAuth from "../src/components/RequireAuth";
+import { getAppSettings } from "../src/services/firebase/settingsService";
 
 const ApiSettings = () => {
   const [apiSettings, setApiSettings] = useState([]);
@@ -159,10 +160,28 @@ const ApiSettings = () => {
     });
   };
 
+
+  const [appSettings, setAppSettings] = useState(null);
+
+  // App Settings (Başlık için)
+  const fetchAppSettings = async () => {
+    try {
+      const settings = await getAppSettings();
+      setAppSettings(settings);
+    } catch (error) {
+      console.error("Uygulama ayarları alınırken hata oluştu:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAppSettings(); 
+  }, []);
+
+ 
   return (
     <RequireAuth>
       <Head>
-        <title>API Ayarları • rsrichsoul</title>
+        <title>{appSettings ? `${appSettings.appName} • API Ayarları` : 'API Ayarları'}</title>
       </Head>
 
       <Box p={4}>

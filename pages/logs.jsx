@@ -18,13 +18,11 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
-import {
-  getAllLogs,
-  deleteLog,
-} from "../src/services/firebase/logsService";
+import { getAllLogs, deleteLog } from "../src/services/firebase/logsService";
 import AlertComponent from "../src/components/AlertComponent";
 import Head from "next/head";
 import RequireAuth from "../src/components/RequireAuth";
+import { getAppSettings } from "../src/services/firebase/settingsService";
 
 const Logs = () => {
   const [logs, setLogs] = useState([]);
@@ -101,19 +99,49 @@ const Logs = () => {
     });
   };
 
+  const [appSettings, setAppSettings] = useState(null);
+
+  // App Settings (Başlık için)
+  const fetchAppSettings = async () => {
+    try {
+      const settings = await getAppSettings();
+      setAppSettings(settings);
+    } catch (error) {
+      console.error("Uygulama ayarları alınırken hata oluştu:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAppSettings();
+  }, []);
+
   return (
     <RequireAuth>
       <Head>
-        <title>Log Yönetimi • rsrichsoul</title>
+        <title>
+          {appSettings
+            ? `${appSettings.appName} • Log Yönetimi`
+            : "Log Yönetimi"}
+        </title>
       </Head>
 
       <Box p={4}>
         {/* Uyarı Mesajları */}
         {error && (
-          <AlertComponent status="error" title="Hata" description={error} onClose={() => setError("")} />
+          <AlertComponent
+            status="error"
+            title="Hata"
+            description={error}
+            onClose={() => setError("")}
+          />
         )}
         {success && (
-          <AlertComponent status="success" title="Başarılı" description={success} onClose={() => setSuccess("")} />
+          <AlertComponent
+            status="success"
+            title="Başarılı"
+            description={success}
+            onClose={() => setSuccess("")}
+          />
         )}
         {alert.visible && (
           <AlertComponent
@@ -127,7 +155,11 @@ const Logs = () => {
 
         {/* Filtreleme */}
         <Box borderWidth={1} borderRadius="lg" p={4} mb={8}>
-          <Box display="flex" justifyContent="space-between" alignItems="center">
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+          >
             <FormLabel mb={0}>Filtreler</FormLabel>
             <IconButton
               icon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
@@ -142,7 +174,9 @@ const Logs = () => {
               <Select
                 name="logType"
                 value={filter.logType}
-                onChange={(e) => setFilter({ ...filter, logType: e.target.value })}
+                onChange={(e) =>
+                  setFilter({ ...filter, logType: e.target.value })
+                }
               >
                 <option value="">Hepsi</option>
                 <option value="error">Hata</option>
@@ -156,7 +190,9 @@ const Logs = () => {
                 type="date"
                 name="startDate"
                 value={filter.startDate}
-                onChange={(e) => setFilter({ ...filter, startDate: e.target.value })}
+                onChange={(e) =>
+                  setFilter({ ...filter, startDate: e.target.value })
+                }
               />
             </FormControl>
             <FormControl mt={4}>
@@ -165,7 +201,9 @@ const Logs = () => {
                 type="date"
                 name="endDate"
                 value={filter.endDate}
-                onChange={(e) => setFilter({ ...filter, endDate: e.target.value })}
+                onChange={(e) =>
+                  setFilter({ ...filter, endDate: e.target.value })
+                }
               />
             </FormControl>
             <Button mt={4} onClick={applyFilter} colorScheme="blue">
@@ -194,7 +232,10 @@ const Logs = () => {
                   <Td>{new Date(log.timestamp).toLocaleString()}</Td>
                   <Td>{log.message}</Td>
                   <Td>
-                    <Button colorScheme="red" onClick={() => handleDelete(log.id)}>
+                    <Button
+                      colorScheme="red"
+                      onClick={() => handleDelete(log.id)}
+                    >
                       Sil
                     </Button>
                   </Td>

@@ -7,18 +7,19 @@ function Logo({
   locale = "tr",
   position = "header",
   isLink = true,
-  href='/',
-  rel='home',
+  href = '/',
+  rel = 'home',
   src = "",
 }) {
   const cursor = isLink ? "pointer" : "default";
 
+  // Cihaz platformuna göre boyut belirleme
   const platform = useBreakpointValue({ base: "mobile", md: "desktop" });
 
   const size = {
     header: {
       mobile: { h: 35, w: 125 },
-      desktop: { h: 50, w: 150 },
+      desktop: { h: 50, w: 50 },
     },
     footer: {
       mobile: { h: 75, w: 150 },
@@ -36,10 +37,12 @@ function Logo({
     login: useColorModeValue("#fff", "#fff"),
   }[position];
 
+  // Logo bileşeni
   const LogoContent = (
     <LogoImage size={size} cursor={cursor} color={color} />
   );
 
+  // Eğer logo bir linkse
   return isLink ? (
     <Link href={href} rel={rel} locale={locale}>
       {LogoContent}
